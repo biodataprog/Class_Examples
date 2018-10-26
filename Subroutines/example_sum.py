@@ -14,7 +14,12 @@ def sum_list_numbers(input_numbers):
 #    print(running_total)
     return running_total
 
+def average(input_numbers):
+    avg = sum_list_numbers(input_numbers) / len(input_numbers)
+    return avg
+
 # here we are actually using the subroutine
 list_o_nums = [10,20,30,40]
 sum = sum_list_numbers(list_o_nums)
 print("sum of", list_o_nums,"is",sum)
+print("avg of",list_o_nums,"is",average(list_o_nums))
