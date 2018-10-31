@@ -31,6 +31,21 @@ def aspairs(f):
 # translate_protein.py coding_sequences.fasta > protein_sequences.fasta
 
 codon_table = "codon_table_compact.txt"
+codon_lookup = {} # dictionary to lookup a codon and find the AA
+
+with open(codon_table,"r") as ct:
+    for line in ct:
+        line = line.strip()
+        codoninfo = line.split()
+
+        codons = codoninfo[0].split(",")
+        aminoacid = codoninfo[1]
+        for codon in codons:
+            print('codon ',codon,'translates to',aminoacid)
+            codon_lookup[codon] = aminoacid
+        
+        print(codoninfo)
+        print(line)
 
 filename = sys.argv[1]
 
