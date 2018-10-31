@@ -37,20 +37,36 @@ with open(codon_table,"r") as ct:
     for line in ct:
         line = line.strip()
         codoninfo = line.split()
-
+        # turn the list of codons (AAA,AAT,.. into an array)
         codons = codoninfo[0].split(",")
-        aminoacid = codoninfo[1]
+        aminoacid = codoninfo[1] # store the amino acid from col 2
+        # for each codon, assign it the value of the current amino acid
+        # by storing it in the dictionary 'codon_lookup'
         for codon in codons:
-            print('codon ',codon,'translates to',aminoacid)
+#            print('codon ',codon,'translates to',aminoacid)
             codon_lookup[codon] = aminoacid
         
-        print(codoninfo)
-        print(line)
+#        print(codoninfo)
+#        print(line)
 
 filename = sys.argv[1]
 
 with open(filename,"r") as f:
    seqs = dict(aspairs(f))
-   print(seqs)
+#   print(seqs)
    for seqid in seqs.keys():
-       print("seqid is",seqid)
+       #print("seqid is",seqid)
+       cdsseq = seqs[seqid]
+       #print('length of sequence is',len(cdsseq))
+       proteinseq = ""
+       for start in range(0,len(cdsseq), 3):
+           #print("starting base is",start)
+           codon = cdsseq[start:start + 3]
+
+           AA = codon_lookup[codon]
+           #print("codon is",codon, " AA is",AA)
+           proteinseq += AA
+# also can be written
+#           proteinseq = (proteinseq + AA)
+       print(">%s"%(seqid))
+       print(proteinseq)
