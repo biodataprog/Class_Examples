@@ -51,6 +51,9 @@ with open(codon_table,"r") as ct:
 
 filename = sys.argv[1]
 
+# can run either way
+# python translate_protein.py orf_coding.fasta > orf_coding.pep
+# ./translate_protein.py orf_coding.fasta > orf_coding.pep
 with open(filename,"r") as f:
    seqs = dict(aspairs(f))
 #   print(seqs)
